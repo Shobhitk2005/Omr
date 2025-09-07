@@ -15,12 +15,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('index') }}">
-                <i class="fas fa-file-alt me-2"></i>
-                OMR Sheet Generator
+                <i class="fas fa-graduation-cap me-2"></i>
+                Little Flower OMR Generator
             </a>
+            <div class="navbar-text text-light">
+                <small class="opacity-75">Designed by Afzal Moin</small>
+            </div>
         </div>
     </nav>
 
@@ -40,12 +43,28 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="mt-5 py-4 bg-dark text-light">
+    <footer class="mt-5 py-4 bg-gradient-dark text-light">
         <div class="container text-center">
-            <p class="mb-0">
-                <i class="fas fa-graduation-cap me-2"></i>
-                Professional OMR Sheet Generator - Create custom answer sheets for any exam
-            </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-1">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        <strong>Little Flower OMR Generator</strong>
+                    </p>
+                    <small class="text-muted">Professional answer sheets for educational excellence</small>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1">
+                        <i class="fas fa-code me-2"></i>
+                        <strong>Made by Afzal Moin</strong>
+                    </p>
+                    <small class="text-muted">Crafted with precision for Little Flower School</small>
+                </div>
+            </div>
+            <hr class="my-3 border-secondary">
+            <small class="text-muted">
+                © 2024 Little Flower OMR Generator. Designed and developed by Afzal Moin.
+            </small>
         </div>
     </footer>
 
