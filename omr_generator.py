@@ -79,7 +79,10 @@ def generate_omr_sheet(school_name, exam_name, subjects, questions_per_subject=2
     
     for col in range(num_subjects):
         x_offset = 50 + col*col_width
-        bubble_spacing = (col_width - 80) / len(options)  # even spacing
+        # Improved spacing calculation with minimum spacing
+        available_bubble_width = col_width - 90  # Reserve more space
+        min_spacing = 20  # Minimum spacing between bubbles
+        bubble_spacing = max(min_spacing, available_bubble_width / len(options))
         
         for q in range(questions_per_subject):
             y = start_y - (q+1)*row_height
@@ -90,9 +93,9 @@ def generate_omr_sheet(school_name, exam_name, subjects, questions_per_subject=2
             c.setFont("Helvetica", 9)
             c.drawRightString(x_offset + 35, y, q_no)
             
-            # Draw bubbles with options inside
+            # Draw bubbles with options inside - better spacing
             for i, option in enumerate(options):
-                bubble_x = x_offset + 50 + i * bubble_spacing
+                bubble_x = x_offset + 55 + i * bubble_spacing  # Start a bit further right
                 bubble_y = y + 3
                 c.circle(bubble_x, bubble_y, bubble_radius, stroke=1, fill=0)
                 c.setFont("Helvetica-Bold", 7)
