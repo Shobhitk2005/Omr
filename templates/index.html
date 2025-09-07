@@ -36,26 +36,32 @@
                 </p>
 
                 <form method="POST" action="{{ url_for('generate') }}" enctype="multipart/form-data" id="omrForm">
-                    <div class="row">
+                    <div class="row g-3">
                         <!-- School/Institution Details -->
-                        <div class="col-md-6 mb-3">
+                        <div class="col-12 col-md-6">
                             <label for="school_name" class="form-label">
-                                <i class="fas fa-school me-1"></i>
+                                <i class="fas fa-school me-2"></i>
                                 School/Institution Name *
                             </label>
                             <input type="text" class="form-control" id="school_name" name="school_name" 
                                    placeholder="e.g., Little Flowers' School" required maxlength="100">
-                            <div class="form-text">This will appear as the main header</div>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle me-1"></i>
+                                This will appear as the main header on your OMR sheet
+                            </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-12 col-md-6">
                             <label for="exam_name" class="form-label">
-                                <i class="fas fa-clipboard-list me-1"></i>
+                                <i class="fas fa-clipboard-list me-2"></i>
                                 Exam Name *
                             </label>
                             <input type="text" class="form-control" id="exam_name" name="exam_name" 
                                    placeholder="e.g., JEE-Main, Mid-Term Exam" required maxlength="50">
-                            <div class="form-text">Name of the examination</div>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Specific name of the examination or test
+                            </div>
                         </div>
                     </div>
 
@@ -74,36 +80,36 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row g-3">
                         <!-- Questions and Options -->
-                        <div class="col-md-6 mb-3">
+                        <div class="col-12 col-md-6">
                             <label for="questions_per_subject" class="form-label">
-                                <i class="fas fa-question-circle me-1"></i>
+                                <i class="fas fa-question-circle me-2"></i>
                                 Questions per Subject
                             </label>
                             <select class="form-select" id="questions_per_subject" name="questions_per_subject">
                                 <option value="10">10 Questions</option>
                                 <option value="15">15 Questions</option>
                                 <option value="20">20 Questions</option>
-                                <option value="25" selected>25 Questions</option>
+                                <option value="25" selected>25 Questions ⭐ Popular</option>
                                 <option value="30">30 Questions</option>
                                 <option value="40">40 Questions</option>
-                                <option value="45">45 Questions (NEET)</option>
+                                <option value="45">45 Questions (NEET Standard)</option>
                                 <option value="50">50 Questions</option>
                                 <option value="75">75 Questions</option>
                                 <option value="100">100 Questions</option>
                             </select>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-12 col-md-6">
                             <label for="num_options" class="form-label">
-                                <i class="fas fa-list me-1"></i>
+                                <i class="fas fa-list me-2"></i>
                                 Answer Options
                             </label>
                             <select class="form-select" id="num_options" name="num_options">
                                 <option value="2">2 Options (A, B)</option>
                                 <option value="3">3 Options (A, B, C)</option>
-                                <option value="4" selected>4 Options (A, B, C, D)</option>
+                                <option value="4" selected>4 Options (A, B, C, D) ⭐ Standard</option>
                                 <option value="5">5 Options (A, B, C, D, E)</option>
                                 <option value="6">6 Options (A, B, C, D, E, F)</option>
                             </select>
@@ -138,21 +144,28 @@
 
                     <!-- Quick Templates -->
                     <div class="mb-4">
-                        <h6 class="fw-bold mb-3">
+                        <h6 class="fw-bold mb-3 d-flex align-items-center">
                             <i class="fas fa-magic me-2"></i>
                             Quick Templates
+                            <span class="badge bg-info ms-2 fs-6">Popular</span>
                         </h6>
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <button type="button" class="btn btn-outline-primary btn-sm w-100" id="jeeTemplate">
-                                    <i class="fas fa-rocket me-1"></i>
-                                    JEE Template (25 Q each)
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <button type="button" class="btn btn-outline-primary w-100 py-3" id="jeeTemplate">
+                                    <i class="fas fa-rocket me-2"></i>
+                                    <div class="d-block">
+                                        <div class="fw-bold">JEE Template</div>
+                                        <small>Physics, Chemistry, Mathematics (25 Q each)</small>
+                                    </div>
                                 </button>
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <button type="button" class="btn btn-outline-success btn-sm w-100" id="neetTemplate">
-                                    <i class="fas fa-stethoscope me-1"></i>
-                                    NEET Template (45 Q each)
+                            <div class="col-12 col-md-6">
+                                <button type="button" class="btn btn-outline-success w-100 py-3" id="neetTemplate">
+                                    <i class="fas fa-stethoscope me-2"></i>
+                                    <div class="d-block">
+                                        <div class="fw-bold">NEET Template</div>
+                                        <small>Physics, Chemistry, Botany, Zoology (45 Q each)</small>
+                                    </div>
                                 </button>
                             </div>
                         </div>
@@ -171,35 +184,35 @@
 
         <!-- Features Section -->
         <div class="row mt-5">
-            <div class="col-md-4 mb-3">
-                <div class="card h-100">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 feature-card">
                     <div class="card-body text-center">
-                        <i class="fas fa-cogs fa-2x text-primary mb-3"></i>
-                        <h5>Fully Customizable</h5>
+                        <i class="fas fa-cogs fa-2x mb-3"></i>
+                        <h5 class="fw-bold">Fully Customizable</h5>
                         <p class="text-muted">
-                            Configure subjects, questions, and answer options according to your needs.
+                            Configure subjects, questions, and answer options according to your examination needs.
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="card h-100">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 feature-card">
                     <div class="card-body text-center">
-                        <i class="fas fa-file-pdf fa-2x text-danger mb-3"></i>
-                        <h5>Professional Output</h5>
+                        <i class="fas fa-file-pdf fa-2x mb-3"></i>
+                        <h5 class="fw-bold">Professional Output</h5>
                         <p class="text-muted">
-                            High-quality PDF output with proper spacing and professional design.
+                            High-quality PDF output with proper spacing and professional design for optical scanning.
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="card h-100">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 feature-card">
                     <div class="card-body text-center">
-                        <i class="fas fa-lightning-bolt fa-2x text-warning mb-3"></i>
-                        <h5>Instant Generation</h5>
+                        <i class="fas fa-bolt fa-2x mb-3"></i>
+                        <h5 class="fw-bold">Instant Generation</h5>
                         <p class="text-muted">
-                            Generate and download your OMR sheets instantly with just one click.
+                            Generate and download your OMR sheets instantly with just one click on any device.
                         </p>
                     </div>
                 </div>
