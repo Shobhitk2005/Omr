@@ -116,7 +116,7 @@ def generate_omr_sheet(school_name, exam_name, subjects, questions_per_subject=2
     c.drawString(55, 75, "CANDIDATE'S SIGNATURE")
     
     c.rect(290, 45, 220, 40)
-    c.drawString(295, 75, "INVIGILATOR SIGN")
+    c.drawString(295, 75, "INVIGILATOR'S SIGN")
     
     # Save PDF
     c.save()
