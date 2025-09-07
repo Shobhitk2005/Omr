@@ -74,14 +74,17 @@ def generate_omr_sheet(school_name, exam_name, subjects, questions_per_subject=2
     row_height = available_height / questions_per_subject
     bubble_radius = min(6, row_height/3)  # keep bubbles proportional
     
-    # Draw bubbles for each subject
+    # Draw bubbles for each subject with continuous numbering
+    question_counter = 1  # Start continuous numbering from 1
+    
     for col in range(num_subjects):
         x_offset = 50 + col*col_width
         bubble_spacing = (col_width - 80) / len(options)  # even spacing
         
         for q in range(questions_per_subject):
             y = start_y - (q+1)*row_height
-            q_no = f"{q+1:02d}"
+            q_no = f"{question_counter:02d}"
+            question_counter += 1  # Increment for continuous numbering
             
             # Right-aligned question number
             c.setFont("Helvetica", 9)
