@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title mb-0">
+                    <i class="fas fa-file-pdf me-2"></i>
+                    Generate Custom OMR Answer Sheet
+                </h2>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-4">
+                    Create professional OMR answer sheets with customizable parameters. 
+                    Perfect for schools, coaching institutes, and examination boards.
+                </p>
+
+                <form method="POST" action="{{ url_for('generate') }}" enctype="multipart/form-data" id="omrForm">
+                    <div class="row">
+                        <!-- School/Institution Details -->
+                        <div class="col-md-6 mb-3">
+                            <label for="school_name" class="form-label">
+                                <i class="fas fa-school me-1"></i>
+                                School/Institution Name *
+                            </label>
+                            <input type="text" class="form-control" id="school_name" name="school_name" 
+                                   placeholder="e.g., Little Flowers' School" required maxlength="100">
+                            <div class="form-text">This will appear as the main header</div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="exam_name" class="form-label">
+                                <i class="fas fa-clipboard-list me-1"></i>
+                                Exam Name *
+                            </label>
+                            <input type="text" class="form-control" id="exam_name" name="exam_name" 
+                                   placeholder="e.g., JEE-Main, Mid-Term Exam" required maxlength="50">
+                            <div class="form-text">Name of the examination</div>
+                        </div>
+                    </div>
+
+                    <!-- Subjects Configuration -->
+                    <div class="mb-3">
+                        <label for="subjects" class="form-label">
+                            <i class="fas fa-book me-1"></i>
+                            Subjects *
+                        </label>
+                        <input type="text" class="form-control" id="subjects" name="subjects" 
+                               placeholder="Physics, Chemistry, Mathematics" required>
+                        <div class="form-text">
+                            Enter subjects separated by commas. Maximum 5 subjects allowed.
+                            <br><strong>Example:</strong> Physics, Chemistry, Mathematics
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Questions and Options -->
+                        <div class="col-md-6 mb-3">
+                            <label for="questions_per_subject" class="form-label">
+                                <i class="fas fa-question-circle me-1"></i>
+                                Questions per Subject
+                            </label>
+                            <select class="form-select" id="questions_per_subject" name="questions_per_subject">
+                                <option value="10">10 Questions</option>
+                                <option value="15">15 Questions</option>
+                                <option value="20">20 Questions</option>
+                                <option value="25" selected>25 Questions</option>
+                                <option value="30">30 Questions</option>
+                                <option value="40">40 Questions</option>
+                                <option value="50">50 Questions</option>
+                                <option value="75">75 Questions</option>
+                                <option value="100">100 Questions</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="num_options" class="form-label">
+                                <i class="fas fa-list me-1"></i>
+                                Answer Options
+                            </label>
+                            <select class="form-select" id="num_options" name="num_options">
+                                <option value="2">2 Options (A, B)</option>
+                                <option value="3">3 Options (A, B, C)</option>
+                                <option value="4" selected>4 Options (A, B, C, D)</option>
+                                <option value="5">5 Options (A, B, C, D, E)</option>
+                                <option value="6">6 Options (A, B, C, D, E, F)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Logo Upload -->
+                    <div class="mb-4">
+                        <label for="logo" class="form-label">
+                            <i class="fas fa-image me-1"></i>
+                            Institution Logo (Optional)
+                        </label>
+                        <input type="file" class="form-control" id="logo" name="logo" 
+                               accept=".png,.jpg,.jpeg,.gif">
+                        <div class="form-text">
+                            Upload your institution's logo. Supported formats: PNG, JPG, JPEG, GIF (Max: 5MB)
+                        </div>
+                    </div>
+
+                    <!-- Preview Section -->
+                    <div class="card bg-light mb-4" id="previewCard" style="display: none;">
+                        <div class="card-header">
+                            <h6 class="card-title mb-0">
+                                <i class="fas fa-eye me-1"></i>
+                                Preview Configuration
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div id="previewContent"></div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg" id="generateBtn">
+                            <i class="fas fa-download me-2"></i>
+                            Generate & Download OMR Sheet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row mt-5">
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cogs fa-2x text-primary mb-3"></i>
+                        <h5>Fully Customizable</h5>
+                        <p class="text-muted">
+                            Configure subjects, questions, and answer options according to your needs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-file-pdf fa-2x text-danger mb-3"></i>
+                        <h5>Professional Output</h5>
+                        <p class="text-muted">
+                            High-quality PDF output with proper spacing and professional design.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-lightning-bolt fa-2x text-warning mb-3"></i>
+                        <h5>Instant Generation</h5>
+                        <p class="text-muted">
+                            Generate and download your OMR sheets instantly with just one click.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Usage Instructions
+                </h5>
+            </div>
+            <div class="card-body">
+                <ol>
+                    <li><strong>Enter Institution Details:</strong> Provide your school/institution name and exam name.</li>
+                    <li><strong>Configure Subjects:</strong> List your subjects separated by commas (max 5 subjects).</li>
+                    <li><strong>Set Parameters:</strong> Choose the number of questions per subject and answer options.</li>
+                    <li><strong>Add Logo (Optional):</strong> Upload your institution's logo for branding.</li>
+                    <li><strong>Generate:</strong> Click the generate button to create and download your PDF.</li>
+                </ol>
+                
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-lightbulb me-2"></i>
+                    <strong>Tip:</strong> The generated OMR sheets are optimized for optical scanning and include 
+                    candidate information sections, declaration areas, and proper bubble spacing.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
