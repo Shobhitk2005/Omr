@@ -46,8 +46,10 @@ def generate_omr_sheet(school_name, exam_name, subjects, questions_per_subject=2
     # Title and Subtitles
     c.setFont("Helvetica-Bold", 16)
     c.drawCentredString(width/2, height-50, school_name.upper())
+    c.setFont("Helvetica", 10)
+    c.drawCentredString(width/2, height-65, "JB Complex, College Road, Nalbari")
     c.setFont("Helvetica", 12)
-    c.drawCentredString(width/2, height-75, f"ANSWER SHEET - {exam_name.upper()}")
+    c.drawCentredString(width/2, height-85, f"ANSWER SHEET - {exam_name.upper()}")
     
     # APAAR ID and Booklet No. boxes
     c.rect(width-220, height-100, 180, 30)
