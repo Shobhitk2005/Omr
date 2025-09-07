@@ -1,7 +1,15 @@
-from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
-from reportlab.lib.utils import ImageReader
-from reportlab.lib.units import inch
+try:
+    from reportlab.lib.pagesizes import A4
+    from reportlab.pdfgen import canvas
+    from reportlab.lib.utils import ImageReader
+    from reportlab.lib.units import inch
+    REPORTLAB_AVAILABLE = True
+except ImportError:
+    REPORTLAB_AVAILABLE = False
+    A4 = None
+    canvas = None
+    ImageReader = None
+
 import tempfile
 import os
 import string
@@ -21,6 +29,12 @@ def generate_omr_sheet(school_name, exam_name, subjects, questions_per_subject=2
     Returns:
         Path to generated PDF file
     """
+    
+    if not REPORTLAB_AVAILABLE:
+        raise ImportError(
+            "The reportlab library is required for PDF generation but is not installed. "
+            "Please contact your system administrator to install the reportlab package."
+        )
     
     # Create temporary file for PDF
     temp_pdf = tempfile.NamedTemporaryFile(delete=False, suffix='.pdf')
