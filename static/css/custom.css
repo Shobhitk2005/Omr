@@ -516,15 +516,124 @@ html {
     }
 }
 
+@keyframes slideOutUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
 @keyframes pulse {
     0% {
         transform: scale(1);
+        box-shadow: var(--shadow-medium);
     }
     50% {
         transform: scale(1.05);
+        box-shadow: var(--shadow-color);
     }
     100% {
         transform: scale(1);
+        box-shadow: var(--shadow-medium);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate3d(0, 0, 0);
+    }
+    40%, 43% {
+        transform: translate3d(0, -8px, 0);
+    }
+    70% {
+        transform: translate3d(0, -4px, 0);
+    }
+    90% {
+        transform: translate3d(0, -2px, 0);
+    }
+}
+
+/* ==========================================
+   ENHANCED BUTTON STATES
+   ========================================== */
+
+.btn-pulse {
+    animation: pulse 2s infinite;
+}
+
+.field-focused .form-label {
+    color: #667eea;
+    transform: scale(1.05);
+    transition: all var(--animation-medium) ease;
+}
+
+.field-filled .form-label {
+    color: #4facfe;
+}
+
+/* Touch-optimized interactions */
+@media (hover: none) and (pointer: coarse) {
+    .btn:hover {
+        transform: none;
+    }
+    
+    .btn:active {
+        transform: scale(0.95);
+    }
+    
+    .card:hover {
+        transform: none;
+    }
+}
+
+/* Enhanced mobile touch targets */
+@media (max-width: 768px) {
+    .btn {
+        min-height: 48px;
+        min-width: 48px;
+    }
+    
+    .form-control,
+    .form-select {
+        min-height: 48px;
+    }
+    
+    /* Improved spacing for touch */
+    .row.g-3 > * {
+        padding-bottom: 1rem;
     }
 }
 

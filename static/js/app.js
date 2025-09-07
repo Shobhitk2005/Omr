@@ -1,6 +1,13 @@
-// OMR Generator JavaScript functionality
+// ===============================================
+// MOBILE-FIRST OMR GENERATOR - ENHANCED UX
+// Professional Interactive JavaScript
+// ===============================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Application
+    initializeApp();
+    
+    // Core Elements
     const form = document.getElementById('omrForm');
     const generateBtn = document.getElementById('generateBtn');
     const previewCard = document.getElementById('previewCard');
@@ -13,6 +20,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const questionsInput = document.getElementById('questions_per_subject');
     const optionsInput = document.getElementById('num_options');
     const logoInput = document.getElementById('logo');
+    
+    // Animation and UX Enhancements
+    function initializeApp() {
+        // Add entrance animations to elements
+        animateOnScroll();
+        
+        // Add touch-friendly interactions
+        addTouchInteractions();
+        
+        // Initialize progress indicator
+        initializeProgressIndicator();
+        
+        // Add form field animations
+        addFormFieldAnimations();
+        
+        // Initialize mobile-specific features
+        initializeMobileFeatures();
+    }
 
     // Real-time preview update
     function updatePreview() {
@@ -236,12 +261,303 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Initialize preview
+    // ===============================================
+    // ADVANCED UX FUNCTIONS
+    // ===============================================
+    
+    function animateOnScroll() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards and feature elements
+        document.querySelectorAll('.card, .feature-card').forEach(el => {
+            observer.observe(el);
+        });
+    }
+    
+    function addTouchInteractions() {
+        // Enhanced button touch feedback
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+            
+            btn.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+        
+        // Ripple effect for buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', createRippleEffect);
+        });
+    }
+    
+    function createRippleEffect(e) {
+        const btn = e.currentTarget;
+        const rect = btn.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            left: ${x}px;
+            top: ${y}px;
+            width: ${size}px;
+            height: ${size}px;
+            pointer-events: none;
+        `;
+        
+        btn.style.position = 'relative';
+        btn.style.overflow = 'hidden';
+        btn.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    }
+    
+    function initializeProgressIndicator() {
+        const formFields = [schoolNameInput, examNameInput, subjectsInput];
+        let completedFields = 0;
+        
+        function updateProgress() {
+            completedFields = formFields.filter(field => field.value.trim() !== '').length;
+            const progress = (completedFields / formFields.length) * 100;
+            
+            // Update visual progress if needed
+            if (progress === 100) {
+                generateBtn.classList.add('btn-pulse');
+            } else {
+                generateBtn.classList.remove('btn-pulse');
+            }
+        }
+        
+        formFields.forEach(field => {
+            field.addEventListener('input', updateProgress);
+        });
+    }
+    
+    function addFormFieldAnimations() {
+        // Floating label effect
+        document.querySelectorAll('.form-control, .form-select').forEach(field => {
+            field.addEventListener('focus', function() {
+                this.parentElement.classList.add('field-focused');
+            });
+            
+            field.addEventListener('blur', function() {
+                this.parentElement.classList.remove('field-focused');
+                if (this.value) {
+                    this.parentElement.classList.add('field-filled');
+                } else {
+                    this.parentElement.classList.remove('field-filled');
+                }
+            });
+            
+            // Check if field is pre-filled
+            if (field.value) {
+                field.parentElement.classList.add('field-filled');
+            }
+        });
+        
+        // Smooth transitions for form interactions
+        document.querySelectorAll('.form-control, .form-select').forEach(field => {
+            field.addEventListener('input', function() {
+                this.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    }
+    
+    function initializeMobileFeatures() {
+        // Prevent zoom on input focus (iOS)
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            document.querySelectorAll('input[type="text"], input[type="email"], select').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.fontSize = '16px';
+                });
+            });
+        }
+        
+        // Smooth scrolling for mobile
+        if (window.innerWidth <= 768) {
+            document.addEventListener('touchmove', function(e) {
+                if (e.target.closest('.form-control, .form-select')) {
+                    e.stopPropagation();
+                }
+            }, { passive: true });
+        }
+        
+        // Enhanced mobile navigation
+        let startY;
+        document.addEventListener('touchstart', function(e) {
+            startY = e.touches[0].pageY;
+        }, { passive: true });
+        
+        document.addEventListener('touchmove', function(e) {
+            if (window.scrollY === 0 && e.touches[0].pageY > startY) {
+                // Pull to refresh simulation
+                document.body.style.paddingTop = '10px';
+                setTimeout(() => {
+                    document.body.style.paddingTop = '';
+                }, 300);
+            }
+        }, { passive: true });
+    }
+    
+    // Enhanced alert system with mobile optimization
+    function showAlert(message, type = 'info', duration = 5000) {
+        // Remove existing alerts
+        document.querySelectorAll('.alert').forEach(alert => {
+            alert.style.animation = 'slideOutUp 0.3s ease-in forwards';
+            setTimeout(() => alert.remove(), 300);
+        });
+
+        // Create new alert with enhanced styling
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type} alert-dismissible fade show position-relative`;
+        alertDiv.style.cssText = `
+            animation: slideInDown 0.4s ease-out;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 20px;
+        `;
+        
+        alertDiv.innerHTML = `
+            <div class="d-flex align-items-center">
+                <i class="fas fa-${getAlertIcon(type)} me-3"></i>
+                <div class="flex-grow-1">${message}</div>
+                <button type="button" class="btn-close ms-3" data-bs-dismiss="alert"></button>
+            </div>
+        `;
+
+        // Insert at the top with smooth animation
+        const mainContainer = document.querySelector('main.container');
+        mainContainer.insertBefore(alertDiv, mainContainer.firstChild);
+
+        // Auto-dismiss with countdown
+        let timeLeft = duration / 1000;
+        const countdownInterval = setInterval(() => {
+            timeLeft--;
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                if (alertDiv.parentNode) {
+                    alertDiv.style.animation = 'slideOutUp 0.3s ease-in forwards';
+                    setTimeout(() => alertDiv.remove(), 300);
+                }
+            }
+        }, 1000);
+        
+        // Add swipe to dismiss on mobile
+        if (window.innerWidth <= 768) {
+            addSwipeToDismiss(alertDiv);
+        }
+    }
+    
+    function getAlertIcon(type) {
+        const icons = {
+            success: 'check-circle',
+            error: 'exclamation-triangle',
+            warning: 'exclamation-circle',
+            info: 'info-circle',
+            danger: 'times-circle'
+        };
+        return icons[type] || icons.info;
+    }
+    
+    function addSwipeToDismiss(element) {
+        let startX, startTime;
+        
+        element.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].pageX;
+            startTime = Date.now();
+        }, { passive: true });
+        
+        element.addEventListener('touchmove', function(e) {
+            const currentX = e.touches[0].pageX;
+            const diff = currentX - startX;
+            
+            if (Math.abs(diff) > 50) {
+                this.style.transform = `translateX(${diff}px)`;
+                this.style.opacity = Math.max(0.3, 1 - Math.abs(diff) / 200);
+            }
+        }, { passive: true });
+        
+        element.addEventListener('touchend', function(e) {
+            const endTime = Date.now();
+            const endX = e.changedTouches[0].pageX;
+            const diff = endX - startX;
+            const duration = endTime - startTime;
+            
+            if (Math.abs(diff) > 100 && duration < 500) {
+                // Swipe to dismiss
+                this.style.animation = `slideOut${diff > 0 ? 'Right' : 'Left'} 0.3s ease-in forwards`;
+                setTimeout(() => this.remove(), 300);
+            } else {
+                // Snap back
+                this.style.transform = '';
+                this.style.opacity = '';
+            }
+        }, { passive: true });
+    }
+    
+    // Replace the original showAlert function
+    window.showAlert = showAlert;
+    
+    // Initialize preview with enhanced animations
     updatePreview();
 
-    // Add tooltips to help text
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
+    // Add tooltips with mobile optimization
+    if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl, {
+                trigger: window.innerWidth <= 768 ? 'click' : 'hover focus'
+            });
+        });
+    }
+    
+    // Performance optimization for mobile
+    if (window.innerWidth <= 768) {
+        // Debounce preview updates on mobile
+        const debouncedUpdatePreview = debounce(updatePreview, 300);
+        [schoolNameInput, examNameInput, subjectsInput, questionsInput, optionsInput].forEach(input => {
+            input.removeEventListener('input', updatePreview);
+            input.addEventListener('input', debouncedUpdatePreview);
+        });
+    }
+    
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
 });
