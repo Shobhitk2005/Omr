@@ -96,24 +96,24 @@ def generate_omr_sheet(school_name, exam_name, subjects, questions_per_subject=2
                 # Center the text inside the bubble
                 c.drawCentredString(bubble_x, bubble_y - 2.5, option)
     
-    # Declaration section
+    # Declaration section - moved higher to avoid overlap
     c.setFont("Helvetica-Bold", 10)
-    c.drawString(50, 140, "DECLARATION BY THE CANDIDATE")
+    c.drawString(50, 160, "DECLARATION BY THE CANDIDATE")
     c.setFont("Helvetica", 9)
-    c.drawString(50, 125, "I declare that I have answered the questions with my own hand.")
+    c.drawString(50, 145, "I declare that I have answered the questions with my own hand.")
     
     # Candidate details boxes - larger for more writing space
-    c.rect(50, 85, 220, 40)
-    c.drawString(55, 115, "CANDIDATE'S NAME")
+    c.rect(50, 95, 220, 40)
+    c.drawString(55, 125, "CANDIDATE'S NAME")
     
-    c.rect(290, 85, 220, 40)
-    c.drawString(295, 115, "CLASS/SECTION")
+    c.rect(290, 95, 220, 40)
+    c.drawString(295, 125, "CLASS/SECTION")
     
-    c.rect(50, 35, 220, 40)
-    c.drawString(55, 65, "CANDIDATE'S SIGNATURE")
+    c.rect(50, 45, 220, 40)
+    c.drawString(55, 75, "CANDIDATE'S SIGNATURE")
     
-    c.rect(290, 35, 220, 40)
-    c.drawString(295, 65, "INVIGILATOR SIGN")
+    c.rect(290, 45, 220, 40)
+    c.drawString(295, 75, "INVIGILATOR SIGN")
     
     # Save PDF
     c.save()
