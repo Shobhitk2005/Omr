@@ -4,9 +4,6 @@
 // ===============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Application
-    initializeApp();
-    
     // Core Elements
     const form = document.getElementById('omrForm');
     const generateBtn = document.getElementById('generateBtn');
@@ -20,24 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const questionsInput = document.getElementById('questions_per_subject');
     const optionsInput = document.getElementById('num_options');
     const logoInput = document.getElementById('logo');
-    
-    // Animation and UX Enhancements
-    function initializeApp() {
-        // Add entrance animations to elements
-        animateOnScroll();
-        
-        // Add touch-friendly interactions
-        addTouchInteractions();
-        
-        // Initialize progress indicator
-        initializeProgressIndicator();
-        
-        // Add form field animations
-        addFormFieldAnimations();
-        
-        // Initialize mobile-specific features
-        initializeMobileFeatures();
-    }
 
     // Real-time preview update
     function updatePreview() {
@@ -560,4 +539,25 @@ document.addEventListener('DOMContentLoaded', function() {
             timeout = setTimeout(later, wait);
         };
     }
+    
+    // Animation and UX Enhancements
+    function initializeApp() {
+        // Add entrance animations to elements
+        animateOnScroll();
+        
+        // Add touch-friendly interactions
+        addTouchInteractions();
+        
+        // Initialize progress indicator
+        initializeProgressIndicator();
+        
+        // Add form field animations
+        addFormFieldAnimations();
+        
+        // Initialize mobile-specific features
+        initializeMobileFeatures();
+    }
+    
+    // Initialize Application after all functions are declared
+    initializeApp();
 });
