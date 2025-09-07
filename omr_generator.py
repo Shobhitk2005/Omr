@@ -87,12 +87,14 @@ def generate_omr_sheet(school_name, exam_name, subjects, questions_per_subject=2
             c.setFont("Helvetica", 9)
             c.drawRightString(x_offset + 35, y, q_no)
             
-            # Draw bubbles with options underneath
+            # Draw bubbles with options inside
             for i, option in enumerate(options):
                 bubble_x = x_offset + 50 + i * bubble_spacing
-                c.circle(bubble_x, y+3, bubble_radius, stroke=1, fill=0)
-                c.setFont("Helvetica", 8)
-                c.drawCentredString(bubble_x, y-8, option)
+                bubble_y = y + 3
+                c.circle(bubble_x, bubble_y, bubble_radius, stroke=1, fill=0)
+                c.setFont("Helvetica-Bold", 7)
+                # Center the text inside the bubble
+                c.drawCentredString(bubble_x, bubble_y - 2.5, option)
     
     # Declaration section
     c.setFont("Helvetica-Bold", 10)
