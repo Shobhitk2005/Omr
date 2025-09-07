@@ -212,6 +212,30 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePreview();
     });
 
+    // Quick Template Buttons
+    const jeeTemplateBtn = document.getElementById('jeeTemplate');
+    const neetTemplateBtn = document.getElementById('neetTemplate');
+
+    if (jeeTemplateBtn) {
+        jeeTemplateBtn.addEventListener('click', function() {
+            subjectsInput.value = 'Physics, Chemistry, Mathematics';
+            questionsInput.value = '25';
+            optionsInput.value = '4';
+            updatePreview();
+            showAlert('JEE template applied! Physics, Chemistry, Mathematics with 25 questions each.', 'success');
+        });
+    }
+
+    if (neetTemplateBtn) {
+        neetTemplateBtn.addEventListener('click', function() {
+            subjectsInput.value = 'Physics, Chemistry, Botany, Zoology';
+            questionsInput.value = '45';
+            optionsInput.value = '4';
+            updatePreview();
+            showAlert('NEET template applied! Physics, Chemistry, Botany, Zoology with 45 questions each.', 'success');
+        });
+    }
+
     // Initialize preview
     updatePreview();
 
