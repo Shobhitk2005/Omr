@@ -1,6 +1,6 @@
 # Overview
 
-This is a Flask-based web application that generates professional OMR (Optical Mark Recognition) answer sheets in PDF format. The application allows educational institutions to create customizable answer sheets for various examinations with features like custom school names, exam titles, subject configurations, and adjustable question counts. The system uses ReportLab for PDF generation and provides a responsive web interface for easy sheet creation.
+This is a Flask-based web application that generates professional OMR (Optical Mark Recognition) answer sheets in PDF format. The application features a stunning, mobile-first responsive design with professional animations and modern UI effects. Educational institutions can create customizable answer sheets for various examinations with features like custom school names, exam titles, subject configurations, and adjustable question counts. The system uses ReportLab for PDF generation and provides an exceptional user experience optimized for mobile devices.
 
 # User Preferences
 
@@ -10,9 +10,12 @@ Preferred communication style: Simple, everyday language.
 
 ## Frontend Architecture
 - **Template Engine**: Jinja2 templating with Flask
-- **UI Framework**: Bootstrap with dark theme optimized for Replit
-- **Client-side Enhancement**: Vanilla JavaScript for form validation and real-time preview
-- **Responsive Design**: Mobile-friendly interface with Bootstrap grid system
+- **UI Framework**: Mobile-first responsive design with modern CSS Grid and Flexbox
+- **Design System**: Professional international look with advanced animations and transitions
+- **Client-side Enhancement**: Advanced JavaScript with touch interactions, ripple effects, and mobile optimizations
+- **Responsive Design**: Extremely responsive mobile-first interface optimized for phones, tablets, and desktop
+- **Animation System**: CSS keyframe animations, hover effects, and interactive transitions
+- **Mobile UX**: Touch-friendly interactions, swipe gestures, and mobile-specific optimizations
 
 ## Backend Architecture
 - **Web Framework**: Flask with modular route organization
