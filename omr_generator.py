@@ -102,18 +102,18 @@ def generate_omr_sheet(school_name, exam_name, subjects, questions_per_subject=2
     c.setFont("Helvetica", 9)
     c.drawString(50, 125, "I declare that I have answered the questions with my own hand.")
     
-    # Candidate details boxes
-    c.rect(50, 90, 200, 30)
-    c.drawString(55, 105, "CANDIDATE'S NAME")
+    # Candidate details boxes - larger for more writing space
+    c.rect(50, 85, 220, 40)
+    c.drawString(55, 115, "CANDIDATE'S NAME")
     
-    c.rect(270, 90, 200, 30)
-    c.drawString(275, 105, "CLASS/SECTION")
+    c.rect(290, 85, 220, 40)
+    c.drawString(295, 115, "CLASS/SECTION")
     
-    c.rect(50, 50, 200, 30)
+    c.rect(50, 35, 220, 40)
     c.drawString(55, 65, "CANDIDATE'S SIGNATURE")
     
-    c.rect(270, 50, 200, 30)
-    c.drawString(275, 65, "INVIGILATOR SIGN")
+    c.rect(290, 35, 220, 40)
+    c.drawString(295, 65, "INVIGILATOR SIGN")
     
     # Save PDF
     c.save()
