@@ -49,10 +49,10 @@ def generate_omr_sheet(school_name, exam_name, subjects, questions_per_subject=2
     c.setFont("Helvetica", 12)
     c.drawCentredString(width/2, height-75, f"ANSWER SHEET - {exam_name.upper()}")
     
-    # Roll No. and Booklet No. boxes
+    # APAAR ID and Booklet No. boxes
     c.rect(width-220, height-100, 180, 30)
     c.setFont("Helvetica-Bold", 10)
-    c.drawString(width-215, height-85, "ROLL NO.")
+    c.drawString(width-215, height-85, "APAAR ID")
     
     c.rect(width-220, height-140, 180, 30)
     c.drawString(width-215, height-125, "TEST BOOKLET NUMBER")
